@@ -344,3 +344,4 @@ const CertificateDetail = () => {
 export default CertificateDetail;
 
 
+
