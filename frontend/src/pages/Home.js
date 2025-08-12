@@ -5,22 +5,22 @@ import { Shield, Award, CheckCircle, BarChart3, ArrowRight, Users, FileText, Glo
 const Home = () => {
   const features = [
     {
-      icon: <Shield className="w-8 h-8 text-primary-600" />,
+      icon: <Shield className="w-8 h-8 text-primary-300" />,
       title: 'Blockchain Security',
       description: 'Immutable certificate storage on Ethereum blockchain ensures authenticity and prevents tampering.'
     },
     {
-      icon: <Award className="w-8 h-8 text-primary-600" />,
+      icon: <Award className="w-8 h-8 text-primary-300" />,
       title: 'Instant Verification',
       description: 'Verify any certificate instantly by scanning QR codes or entering certificate IDs.'
     },
     {
-      icon: <CheckCircle className="w-8 h-8 text-primary-600" />,
+      icon: <CheckCircle className="w-8 h-8 text-primary-300" />,
       title: 'Digital Signatures',
       description: 'Cryptographically signed certificates with issuer verification for maximum trust.'
     },
     {
-      icon: <BarChart3 className="w-8 h-8 text-primary-600" />,
+      icon: <BarChart3 className="w-8 h-8 text-primary-300" />,
       title: 'Analytics Dashboard',
       description: 'Comprehensive insights into certificate issuance, verification, and system statistics.'
     }
@@ -36,14 +36,14 @@ const Home = () => {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-primary-50 via-white to-primary-50 py-20">
+      <section className="relative bg-gradient-to-br from-gray-900 via-gray-950 to-black py-20 overflow-hidden">
         <div className="container mx-auto px-4 text-center">
           <div className="max-w-4xl mx-auto">
-            <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
+            <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
               Blockchain-Powered
-              <span className="text-gradient block">Digital Certificates</span>
+              <span className="text-gradient neon-text block">Digital Certificates</span>
             </h1>
-            <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+            <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
               Generate, issue, and verify tamper-proof digital certificates using Ethereum blockchain technology. 
               Ensure authenticity and build trust in the digital age.
             </p>
@@ -65,21 +65,20 @@ const Home = () => {
             </div>
           </div>
         </div>
-        
-        {/* Decorative elements */}
-        <div className="absolute top-10 left-10 w-20 h-20 bg-primary-200 rounded-full opacity-20 animate-float"></div>
-        <div className="absolute bottom-20 right-20 w-32 h-32 bg-primary-300 rounded-full opacity-20 animate-float" style={{ animationDelay: '1s' }}></div>
-        <div className="absolute top-1/2 left-1/4 w-16 h-16 bg-primary-100 rounded-full opacity-30 animate-float" style={{ animationDelay: '2s' }}></div>
+        {/* Animated grid */}
+        <div className="absolute inset-0 minting-grid opacity-40 pointer-events-none" />
+        <div className="absolute -top-32 -left-32 w-96 h-96 bg-primary-500/20 rounded-full blur-3xl" />
+        <div className="absolute -bottom-32 -right-32 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl" />
       </section>
 
       {/* Features Section */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-gray-950">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-4xl font-bold text-white mb-4">
               Why Choose Our Platform?
             </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            <p className="text-xl text-gray-300 max-w-2xl mx-auto">
               Built with cutting-edge blockchain technology to provide the most secure and reliable 
               digital certification system available.
             </p>
@@ -91,10 +90,10 @@ const Home = () => {
                 <div className="flex justify-center mb-4">
                   {feature.icon}
                 </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-3">
+                <h3 className="text-xl font-semibold text-white mb-3">
                   {feature.title}
                 </h3>
-                <p className="text-gray-600">
+                <p className="text-gray-300">
                   {feature.description}
                 </p>
               </div>
@@ -104,46 +103,46 @@ const Home = () => {
       </section>
 
       {/* How It Works Section */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 bg-gray-900">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-4xl font-bold text-white mb-4">
               How It Works
             </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            <p className="text-xl text-gray-300 max-w-2xl mx-auto">
               Simple three-step process from certificate generation to verification
             </p>
           </div>
           
           <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
             <div className="text-center">
-              <div className="w-16 h-16 bg-primary-600 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">
+              <div className="w-16 h-16 bg-primary-600 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4 ring-pulse">
                 1
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">Generate</h3>
-              <p className="text-gray-600">
+              <h3 className="text-xl font-semibold text-white mb-3">Generate</h3>
+              <p className="text-gray-300">
                 Create certificates with student details, course information, and completion dates. 
                 Our system generates a unique cryptographic hash.
               </p>
             </div>
             
             <div className="text-center">
-              <div className="w-16 h-16 bg-primary-600 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">
+              <div className="w-16 h-16 bg-primary-600 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4 ring-pulse" style={{animationDelay:'0.2s'}}>
                 2
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">Store</h3>
-              <p className="text-gray-600">
+              <h3 className="text-xl font-semibold text-white mb-3">Store</h3>
+              <p className="text-gray-300">
                 Certificate hash is stored on the Ethereum blockchain for immutability, 
                 while full data is saved in our secure database.
               </p>
             </div>
             
             <div className="text-center">
-              <div className="w-16 h-16 bg-primary-600 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">
+              <div className="w-16 h-16 bg-primary-600 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4 ring-pulse" style={{animationDelay:'0.4s'}}>
                 3
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">Verify</h3>
-              <p className="text-gray-600">
+              <h3 className="text-xl font-semibold text-white mb-3">Verify</h3>
+              <p className="text-gray-300">
                 Anyone can verify certificates by scanning QR codes or entering IDs. 
                 Instant blockchain verification ensures authenticity.
               </p>
@@ -153,7 +152,7 @@ const Home = () => {
       </section>
 
       {/* Stats Section */}
-      <section className="py-20 bg-primary-600 text-white">
+      <section className="py-20 bg-primary-700 text-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold mb-4">
@@ -183,13 +182,13 @@ const Home = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-gray-900">
         <div className="container mx-auto px-4 text-center">
           <div className="max-w-3xl mx-auto">
-            <h2 className="text-4xl font-bold text-gray-900 mb-6">
+            <h2 className="text-4xl font-bold text-white mb-6">
               Ready to Get Started?
             </h2>
-            <p className="text-xl text-gray-600 mb-8">
+            <p className="text-xl text-gray-300 mb-8">
               Join thousands of organizations already using our blockchain certification platform. 
               Start issuing tamper-proof digital certificates today.
             </p>
@@ -216,6 +215,10 @@ const Home = () => {
 };
 
 export default Home;
+
+
+
+
 
 
 

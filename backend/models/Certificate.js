@@ -31,45 +31,70 @@ const certificateSchema = new mongoose.Schema({
     required: true,
     trim: true
   },
-  certificateHash: {
+  instituteId: {
     type: String,
     required: true,
-    unique: true,
-    index: true
+    ref: 'Institute'
   },
-  blockchainHash: {
+  instituteName: {
+    type: String,
+    required: true
+  },
+  certificateHash: {
     type: String,
     required: true,
     unique: true
   },
-  transactionHash: {
+  blockchainTxHash: {
     type: String,
-    required: true
+    default: null
   },
-  blockNumber: {
+  blockchainBlockNumber: {
     type: Number,
-    required: true
+    default: null
   },
   status: {
     type: String,
     enum: ['active', 'revoked', 'expired'],
     default: 'active'
   },
+  revocationReason: {
+    type: String,
+    default: null
+  },
+  revokedAt: {
+    type: Date,
+    default: null
+  },
+  revokedBy: {
+    type: String,
+    default: null
+  },
+  template: {
+    type: String,
+    enum: ['modern', 'classic', 'elegant', 'professional'],
+    default: 'modern'
+  },
   metadata: {
-    type: mongoose.Schema.Types.Mixed,
-    default: {}
+    grade: String,
+    duration: String,
+    credits: Number,
+    description: String,
+    skills: [String],
+    achievements: [String]
   },
-  pdfUrl: {
-    type: String,
+  files: {
+    pdf: String, // URL to PDF file
+    image: String, // URL to image file
+    qrCode: String // URL to QR code image
+  },
+  verificationCount: {
+    type: Number,
+    default: 0
+  },
+  lastVerified: {
+    type: Date,
     default: null
-  },
-  qrCodeUrl: {
-    type: String,
-    default: null
-  },
-  verificationUrl: {
-    type: String,
-    required: true
   },
   createdAt: {
     type: Date,
@@ -80,79 +105,26 @@ const certificateSchema = new mongoose.Schema({
     default: Date.now
   }
 }, {
-  timestamps: true,
-  toJSON: { virtuals: true },
-  toObject: { virtuals: true }
+  timestamps: true
 });
+
+// Generate unique certificate ID
+certificateSchema.statics.generateCertificateId = function() {
+  const timestamp = Date.now().toString().slice(-8);
+  const random = Math.random().toString(36).substring(2, 6).toUpperCase();
+  return `CERT${timestamp}${random}`;
+};
+
+// Generate certificate hash
+certificateSchema.statics.generateCertificateHash = function(data) {
+  const crypto = require('crypto');
+  const hashData = `${data.studentName}${data.courseName}${data.completionDate}${data.issuerName}${data.issuerOrganization}`;
+  return crypto.createHash('sha256').update(hashData).digest('hex');
+};
 
 // Index for efficient queries
-certificateSchema.index({ certificateId: 1, status: 1 });
-certificateSchema.index({ certificateHash: 1, status: 1 });
-certificateSchema.index({ studentName: 1, courseName: 1 });
-certificateSchema.index({ completionDate: 1 });
+certificateSchema.index({ instituteId: 1, createdAt: -1 });
+certificateSchema.index({ certificateHash: 1 });
+certificateSchema.index({ status: 1 });
 
-// Virtual for formatted completion date
-certificateSchema.virtual('formattedCompletionDate').get(function() {
-  return this.completionDate.toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric'
-  });
-});
-
-// Virtual for certificate age
-certificateSchema.virtual('age').get(function() {
-  const now = new Date();
-  const diffTime = Math.abs(now - this.completionDate);
-  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-  return diffDays;
-});
-
-// Pre-save middleware to update updatedAt
-certificateSchema.pre('save', function(next) {
-  this.updatedAt = new Date();
-  next();
-});
-
-// Static method to find active certificates
-certificateSchema.statics.findActive = function() {
-  return this.find({ status: 'active' });
-};
-
-// Static method to find by student name
-certificateSchema.statics.findByStudent = function(studentName) {
-  return this.find({ 
-    studentName: { $regex: studentName, $options: 'i' },
-    status: 'active'
-  });
-};
-
-// Static method to find by course
-certificateSchema.statics.findByCourse = function(courseName) {
-  return this.find({ 
-    courseName: { $regex: courseName, $options: 'i' },
-    status: 'active'
-  });
-};
-
-// Instance method to revoke certificate
-certificateSchema.methods.revoke = function() {
-  this.status = 'revoked';
-  this.updatedAt = new Date();
-  return this.save();
-};
-
-// Instance method to check if valid
-certificateSchema.methods.isValid = function() {
-  return this.status === 'active';
-};
-
-const Certificate = mongoose.model('Certificate', certificateSchema);
-
-module.exports = Certificate;
-
-
-
-
-
-
+module.exports = mongoose.model('Certificate', certificateSchema);

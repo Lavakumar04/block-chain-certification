@@ -11,7 +11,10 @@ class BlockchainService {
     this.contractABI = null;
     this.isMockMode = true; // Start in mock mode
     
-    this.initialize();
+    // Initialize asynchronously without blocking
+    this.initialize().catch(err => {
+      console.log('⚠️  Blockchain service initialization failed, staying in mock mode:', err.message);
+    });
   }
 
   async initialize() {
@@ -22,7 +25,7 @@ class BlockchainService {
       
       // Try to connect to real blockchain if available
       try {
-        this.provider = new ethers.JsonRpcProvider(
+        this.provider = new ethers.providers.JsonRpcProvider(
           process.env.GANACHE_RPC_URL || 'http://127.0.0.1:7545'
         );
 
