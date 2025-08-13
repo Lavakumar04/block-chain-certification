@@ -155,12 +155,14 @@ const VerifyCertificate = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-950 py-12">
+    <div className="min-h-screen bg-gray-900 py-8">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header */}
         <div className="text-center mb-8">
-          <Search className="h-16 w-16 text-primary-400 mx-auto mb-4" />
-          <h1 className="text-3xl font-bold text-white mb-2">Verify Digital Certificate</h1>
-          <p className="text-lg text-gray-300">Verify the authenticity of blockchain-based digital certificates</p>
+          <h1 className="text-3xl font-bold text-primary-400 mb-2">Certificate Verification</h1>
+          <p className="text-gray-400">
+            Verify the authenticity of academic certificates using blockchain technology
+          </p>
         </div>
 
         <div className="card mb-8">
